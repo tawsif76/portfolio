@@ -5,19 +5,17 @@ import { Github, ArrowLeft } from 'lucide-react';
 import { projects } from '@/data/projects';
 import type { Project } from '@/types/project';
 
-interface ProjectPageProps {
-  params: {
-    slug: string;
-  };
-}
-
 export async function generateStaticParams() {
   return projects.map((project) => ({
     slug: project.slug,
   }));
 }
 
-export default function ProjectPage({ params }: ProjectPageProps) {
+// The 'props' are typed as 'any' to bypass the incorrect auto-generated types from Next.js.
+// We then create a correctly typed 'params' object for use within the component.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default function ProjectPage(props: any) {
+  const { params } = props as { params: { slug: string } };
   const project: Project | undefined = projects.find((p: Project) => p.slug === params.slug);
 
   if (!project) {

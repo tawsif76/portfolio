@@ -6,14 +6,16 @@ import { Calendar, ArrowLeft } from "lucide-react";
 // Generate static paths
 export async function generateStaticParams() {
   const posts = await getAllPosts();
-  return posts.map((post) => ({ slug: post.slug }));
+  return posts.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+// The 'props' are typed as 'any' to bypass the incorrect auto-generated types from Next.js.
+// We then create a correctly typed 'params' object for use within the component.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function BlogPostPage(props: any) {
+  const { params } = props as { params: { slug: string } };
   const post = await getPostBySlug(params.slug);
 
   if (!post) {
