@@ -18,6 +18,7 @@ export interface BlogPost {
   content: string;
   tags: string[];
   readTime: string;
+  image?: string; // Optional image URL for the blog post
 }
 
 export function getAllPosts(): BlogPost[] {

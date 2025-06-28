@@ -1,6 +1,5 @@
 // In app/blog/page.tsx
 
-import Link from "next/link";
 import { getAllPosts } from "@/lib/blog";
 import { Rss, ShieldCheck, GitBranch } from "lucide-react";
 import BlogCard from "@/components/BlogCard";
