@@ -3,32 +3,29 @@ import Link from "next/link";
 import { getAllPosts, getPostBySlug, markdownToHtml } from "@/lib/blog";
 import { Calendar, ArrowLeft } from "lucide-react";
 
-// This function tells Next.js which pages to build
+// Generate static paths
 export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((post) => ({
-    slug: post.slug,
-  }));
+  const posts = await getAllPosts(); // await if async
+  return posts.map((post) => ({ slug: post.slug }));
 }
 
-// This function fetches post data and renders the page
-export default async function BlogPostPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
-  const post = getPostBySlug(params.slug);
+type BlogPostPageProps = {
+  params: {
+    slug: string;
+  };
+};
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const post = await getPostBySlug(params.slug); // await if async
 
   if (!post) {
     notFound();
   }
 
-  // Converts the markdown content of your post to HTML
   const contentHtml = await markdownToHtml(post.content || "");
 
   return (
     <main className="container mx-auto px-4 py-12 max-w-3xl">
-      {/* Back to Blog Link */}
       <Link
         href="/blog"
         className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline mb-8"
@@ -38,7 +35,6 @@ export default async function BlogPostPage({
       </Link>
 
       <article>
-        {/* Article Header */}
         <header className="mb-8">
           <h1 className="text-3xl md:text-4xl font-bold mb-4 text-foreground leading-tight">
             {post.title}
@@ -53,7 +49,6 @@ export default async function BlogPostPage({
           </div>
         </header>
 
-        {/* Article Content Rendered from Markdown */}
         <div
           className="prose dark:prose-invert max-w-none"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
