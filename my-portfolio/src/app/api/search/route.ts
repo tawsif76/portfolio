@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, BlogPost } from "@/lib/blog";
 import { projects } from "@/data/projects";
 
 export async function GET() {
   try {
-    const posts = getAllPosts();
+    const posts: BlogPost[] = await getAllPosts();
     const allProjects = projects;
 
     const searchData = [

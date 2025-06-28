@@ -9,11 +9,12 @@ export async function generateStaticParams() {
   return posts.map((post) => ({ slug: post.slug }));
 }
 
-type BlogPostPageProps = {
+interface BlogPostPageProps {
   params: {
     slug: string;
   };
-};
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const post = await getPostBySlug(params.slug);

@@ -1,5 +1,3 @@
-import { Github, Linkedin, Mail, FileText } from "lucide-react";
-
 export default function Footer() {
   return (
     <footer className="bg-slate-950 border-t border-slate-800">
