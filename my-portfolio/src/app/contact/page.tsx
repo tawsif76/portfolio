@@ -17,7 +17,7 @@ export default function ContactPage() {
             <div>
               <p className="text-foreground/80 font-medium">Email</p>
               <a
-                href="mailto:sydul.tawsif@gamil.com"
+                href="mailto:sydul.tawsif@gmail.com"
                 className="text-blue-600 dark:text-blue-400 hover:underline break-all"
               >
                 sydul.tawsif@gmail.com

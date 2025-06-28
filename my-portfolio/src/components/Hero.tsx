@@ -72,6 +72,8 @@ export default function Hero() {
       {
         degree: "B.Sc. in Computer Science, 2025",
         university: "Chittagong University of Engineering and Technology",
+        focus: "",
+        year: "",
       },
     ],
   };
