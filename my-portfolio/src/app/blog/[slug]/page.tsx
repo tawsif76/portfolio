@@ -5,7 +5,8 @@ import { Calendar, ArrowLeft } from "lucide-react";
 
 // Generate static paths
 export async function generateStaticParams() {
-  const posts = await getAllPosts(); // await if async
+  // Removed 'await' as getAllPosts is synchronous
+  const posts = getAllPosts();
   return posts.map((post) => ({ slug: post.slug }));
 }
 
@@ -16,7 +17,8 @@ type BlogPostPageProps = {
 };
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post = await getPostBySlug(params.slug); // await if async
+  // Removed 'await' as getPostBySlug is synchronous
+  const post = getPostBySlug(params.slug);
 
   if (!post) {
     notFound();
