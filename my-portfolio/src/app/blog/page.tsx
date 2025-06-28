@@ -4,8 +4,8 @@ import { getAllPosts } from "@/lib/blog";
 import { Rss, ShieldCheck, GitBranch } from "lucide-react";
 import BlogCard from "@/components/BlogCard";
 
-export default function BlogPage() {
-  const allPosts = getAllPosts();
+export default async function BlogPage() {
+  const allPosts = await getAllPosts();
 
   const categoryIcons: { [key: string]: React.ReactNode } = {
     "Network Security": <ShieldCheck className="w-12 h-12 text-slate-500" />,
