@@ -10,6 +10,14 @@ import rehypeStringify from "rehype-stringify";
 
 const postsDirectory = path.join(process.cwd(), "src/posts");
 
+// Calculate read time based on word count (average 200 words per minute)
+function calculateReadTime(content: string): string {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
+}
+
 export interface BlogPost {
   slug: string;
   title: string;
@@ -32,8 +40,9 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 
       return {
         slug,
-        ...(matterResult.data as Omit<BlogPost, "slug" | "content">),
+        ...(matterResult.data as Omit<BlogPost, "slug" | "content" | "readTime">),
         content: matterResult.content,
+        readTime: calculateReadTime(matterResult.content),
       };
     })
   );
@@ -51,8 +60,9 @@ export async function getPostBySlug(slug: string): Promise<BlogPost | null> {
 
     return {
       slug,
-      ...(matterResult.data as Omit<BlogPost, "slug" | "content">),
+      ...(matterResult.data as Omit<BlogPost, "slug" | "content" | "readTime">),
       content: matterResult.content,
+      readTime: calculateReadTime(matterResult.content),
     };
   } catch {
     return null;
