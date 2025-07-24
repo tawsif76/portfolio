@@ -14,8 +14,9 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const post = await getPostBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
   
   if (!post) {
     return {
@@ -29,10 +30,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default async function BlogPostPage(props: any) {
-  const { params } = props as { params: { slug: string } };
-  const post = await getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
 
   if (!post) {
     notFound();
@@ -43,14 +43,14 @@ export default async function BlogPostPage(props: any) {
   
   // Get related posts (excluding current post)
   const relatedPosts = allPosts
-    .filter(p => p.slug !== params.slug)
+    .filter(p => p.slug !== slug)
     .filter(p => p.tags.some(tag => post.tags.includes(tag)))
     .slice(0, 3);
 
   // If no related posts by tags, get recent posts
   const suggestedPosts = relatedPosts.length > 0 
     ? relatedPosts 
-    : allPosts.filter(p => p.slug !== params.slug).slice(0, 3);
+    : allPosts.filter(p => p.slug !== slug).slice(0, 3);
 
   const categoryColors: { [key: string]: string } = {
     "Network Security": "bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-300",
