@@ -6,7 +6,7 @@ export default function Home() {
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Mohammed Sydul Hasan Tawsif",
-    url: "https://your-domain.vercel.app",
+    url: "https://htawsif.vercel.app/",
     jobTitle: "Research Assistant",
     alumniOf: "Chittagong University of Engineering and Technology",
     sameAs: [
