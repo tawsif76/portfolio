@@ -87,7 +87,7 @@ export default function Footer() {
 
       <div className="border-t border-slate-800 mt-8 pt-8 text-center">
         <p className="text-slate-400">
-          © 2024 Tawsif. Built with Next.js and deployed on GitHub Pages.
+          © 2025 Tawsif. Built with Next.js and deployed on vercel.
         </p>
       </div>
       {/* </footer></div> */}

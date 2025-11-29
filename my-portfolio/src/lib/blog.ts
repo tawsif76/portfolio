@@ -7,6 +7,7 @@ import remarkMath from "remark-math";
 import remarkRehype from "remark-rehype";
 import rehypeKatex from "rehype-katex";
 import rehypeStringify from "rehype-stringify";
+import rehypeHighlight from "rehype-highlight";
 
 const postsDirectory = path.join(process.cwd(), "src/posts");
 
@@ -40,7 +41,10 @@ export async function getAllPosts(): Promise<BlogPost[]> {
 
       return {
         slug,
-        ...(matterResult.data as Omit<BlogPost, "slug" | "content" | "readTime">),
+        ...(matterResult.data as Omit<
+          BlogPost,
+          "slug" | "content" | "readTime"
+        >),
         content: matterResult.content,
         readTime: calculateReadTime(matterResult.content),
       };
@@ -76,6 +80,9 @@ export async function markdownToHtml(markdown: string): Promise<string> {
     .use(remarkRehype, {
       allowDangerousHtml: true,
     })
+    // Add rehypeHighlight BEFORE rehypeStringify
+    // ignoreMissing: true prevents errors if a language isn't found
+    .use(rehypeHighlight, { ignoreMissing: true })
     .use(rehypeKatex, {
       strict: false,
       trust: true,

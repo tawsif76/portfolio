@@ -64,7 +64,7 @@ export default function Header() {
     { name: "Home", href: "/" },
     { name: "Projects", href: "/projects" },
     { name: "Experience", href: "/experience" },
-    { name: "Publications", href: "/publications" },
+    { name: "Research & Publications", href: "/publications" }, // Renamed from "Publications"
     { name: "Blog", href: "/blog" },
     { name: "Contact", href: "/contact" },
   ];

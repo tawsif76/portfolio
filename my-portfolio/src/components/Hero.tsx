@@ -6,8 +6,8 @@ import { Mail, Github, Linkedin, FileText } from "lucide-react";
 export default function Hero() {
   const userDetails = {
     fullName: "Mohammed Sydul Hasan Tawsif",
-    jobTitle: "Undergraduate Student",
-    institution: "Chittagong University of Engineering and Technology",
+    jobTitle: "Prospective Graduate Student",
+    // institution: "Chittagong University of Engineering and Technology",
     profileImage: "/images/profile.jpeg",
     socials: [
       {
@@ -32,15 +32,15 @@ export default function Hero() {
     aboutMeSummary: (
       <>
         <p className="mb-4">
-          I’m a final-year undergraduate student in{" "}
-          <strong>Computer Science and Engineering</strong> at{" "}
+          I recently graduated in{" "}
+          <strong>Computer Science and Engineering</strong> from{" "}
           <strong>Chittagong University of Engineering and Technology</strong>,
           with a strong interest in <strong>computer networking</strong> and{" "}
           <strong>security</strong>. My work spans both traditional{" "}
           <strong>TCP/IP-based systems</strong> and future Internet
-          architectures like <strong>Named Data Networking (NDN)</strong>.
-          Currently, I am working with blockchain-based vehicular network
-          security.
+          architectures like <strong>Named Data Networking (NDN)</strong>. I am
+          currently working on Vehicular NDN, where I aim to design an efficient
+          push-based mechanism for disseminating critical data.
         </p>
         <p className="mb-4">
           Technically, I’m proficient in <strong>C/C++</strong> and{" "}
@@ -50,13 +50,12 @@ export default function Hero() {
         </p>
 
         <p>
-          I am currently seeking{" "}
-          <strong>fully funded research positions</strong> in the field of{" "}
-          <strong>networking and security</strong>, particularly projects that
-          involve <strong>vehicular networks</strong>, the{" "}
-          <strong>Internet of Things (IoT)</strong>, or next-generation Internet
-          technologies like <strong>edge computing</strong>,{" "}
-          <strong>NDN</strong>, or <strong>6G-inspired architectures</strong>.
+          I am currently seeking <strong>Research Assistantship</strong>{" "}
+          Positions in <strong>networking and security</strong>, particularly in
+          areas involving <strong>vehicular networks</strong>, the{" "}
+          <strong>Internet of Things (IoT)</strong>, <strong>Blockchain</strong>
+          , or emerging Internet technologies such as <strong>NDN</strong>, and{" "}
+          <strong>5G/6G-inspired architectures</strong>.
         </p>
       </>
     ),
@@ -119,7 +118,7 @@ export default function Hero() {
                 </a>
               ))}
               {/* CV button */}
-              <a
+              {/* <a
                 href="/cv.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -128,7 +127,7 @@ export default function Hero() {
               >
                 <FileText size={18} className="mr-2" />
                 CV
-              </a>
+              </a> */}
             </div>
           </div>
 

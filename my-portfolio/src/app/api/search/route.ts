@@ -16,13 +16,13 @@ export async function GET() {
       ...allProjects.map((project) => ({
         type: "Project",
         title: project.title,
-        url: `/projects/${project.slug}`,
+        // Fallback to GitHub URL or home if report is missing
+        url: project.reportUrl || project.githubUrl || "#",
       })),
     ];
 
     return NextResponse.json(searchData);
   } catch (error) {
-    // Log the error for debugging
     console.error("Search API Error:", error);
     return new NextResponse("Internal Server Error", { status: 500 });
   }

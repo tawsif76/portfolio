@@ -2,8 +2,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { getAllPosts, getPostBySlug, markdownToHtml } from "@/lib/blog";
-import { Calendar, ArrowLeft, Clock, Tag, User, Share2, BookOpen, ArrowRight } from "lucide-react";
+import { ArrowLeft, Clock, Calendar } from "lucide-react";
 import BlogCard from "@/components/BlogCard";
+import CodeBlockManager from "@/components/CodeBlockManager";
 
 // Generate static paths
 export async function generateStaticParams() {
@@ -14,13 +15,17 @@ export async function generateStaticParams() {
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
-  
+
   if (!post) {
     return {
-      title: 'Post Not Found',
+      title: "Post Not Found",
     };
   }
 
@@ -30,7 +35,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   };
 }
 
-export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+export default async function BlogPostPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
 
@@ -40,90 +49,92 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
 
   const contentHtml = await markdownToHtml(post.content || "");
   const allPosts = await getAllPosts();
-  
+
   // Get related posts (excluding current post)
   const relatedPosts = allPosts
-    .filter(p => p.slug !== slug)
-    .filter(p => p.tags.some(tag => post.tags.includes(tag)))
+    .filter((p) => p.slug !== slug)
+    .filter((p) => p.tags.some((tag) => post.tags.includes(tag)))
     .slice(0, 3);
 
   // If no related posts by tags, get recent posts
-  const suggestedPosts = relatedPosts.length > 0 
-    ? relatedPosts 
-    : allPosts.filter(p => p.slug !== slug).slice(0, 3);
+  const suggestedPosts =
+    relatedPosts.length > 0
+      ? relatedPosts
+      : allPosts.filter((p) => p.slug !== slug).slice(0, 3);
 
   const categoryColors: { [key: string]: string } = {
-    "Network Security": "bg-red-100 text-red-700 dark:bg-red-900/20 dark:text-red-300",
-    "Machine Learning": "bg-purple-100 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300", 
-    "Blockchain": "bg-green-100 text-green-700 dark:bg-green-900/20 dark:text-green-300",
+    "Network Security":
+      "bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-300 border-red-100 dark:border-red-900",
+    "Machine Learning":
+      "bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300 border-purple-100 dark:border-purple-900",
+    Blockchain:
+      "bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-300 border-green-100 dark:border-green-900",
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50/30 dark:from-gray-900 dark:via-gray-900 dark:to-blue-900/10">
-      <div className="container mx-auto px-4 py-8 max-w-5xl">
-        {/* Navigation */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors mb-8 group"
-        >
-          <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-          Back to Blog
-        </Link>
+    <div className="min-h-screen bg-background text-foreground selection:bg-blue-100 dark:selection:bg-blue-900/30">
+      <CodeBlockManager />
 
-        {/* Main Content */}
-        <main className="max-w-4xl mx-auto">
-          <article className="bg-white dark:bg-gray-900/50 rounded-2xl shadow-lg border border-gray-200 dark:border-gray-800 overflow-hidden">
-            {/* Post Header */}
-            <header className="p-6 sm:p-8 border-b border-gray-200 dark:border-gray-800">
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mb-4">
+      {/* Main Container - Constrained width for readability */}
+      <div className="container mx-auto px-4 py-12 md:py-16 max-w-4xl">
+        {/* Minimal Navigation */}
+        <nav className="mb-12">
+          <Link
+            href="/blog"
+            className="group inline-flex items-center text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+            Back to Articles
+          </Link>
+        </nav>
+
+        <main>
+          <article>
+            {/* Header Section */}
+            <header className="mb-10 md:mb-14 text-center">
+              {/* Categories */}
+              <div className="flex flex-wrap gap-2 justify-center mb-6">
                 {post.tags.map((tag) => (
-                  <span 
+                  <span
                     key={tag}
-                    className={`inline-flex items-center px-3 py-1.5 text-xs font-medium rounded-full ${categoryColors[tag] || 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'}`}
+                    className={`px-3 py-1 text-xs font-medium rounded-full border ${
+                      categoryColors[tag] ||
+                      "bg-gray-50 text-gray-700 dark:bg-gray-800 dark:text-gray-300 border-gray-100 dark:border-gray-800"
+                    }`}
                   >
-                    <Tag className="w-3 h-3 mr-1" />
                     {tag}
                   </span>
                 ))}
               </div>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 text-gray-900 dark:text-white leading-tight">
+              {/* Title */}
+              <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-foreground mb-6 leading-tight">
                 {post.title}
               </h1>
 
-              {/* Meta information */}
-              <div className="flex flex-wrap items-center gap-4 text-sm text-gray-600 dark:text-gray-400 mb-6">
-                <div className="flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  <span>Academic Author</span>
-                </div>
+              {/* Meta Data */}
+              <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
                   <Calendar className="w-4 h-4" />
-                  <span>{new Date(post.date).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}</span>
+                  <time dateTime={post.date}>
+                    {new Date(post.date).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </time>
                 </div>
+                <div className="w-1 h-1 rounded-full bg-border" />
                 <div className="flex items-center gap-2">
                   <Clock className="w-4 h-4" />
                   <span>{post.readTime}</span>
                 </div>
               </div>
-
-              {/* Share button */}
-              <div className="flex items-center gap-3">
-                <button className="inline-flex items-center px-4 py-2 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 rounded-lg hover:bg-blue-200 dark:hover:bg-blue-900/50 transition-colors">
-                  <Share2 className="w-4 h-4 mr-2" />
-                  Share
-                </button>
-              </div>
             </header>
 
-            {/* Post Image */}
+            {/* Featured Image - Cinematic width */}
             {post.image && (
-              <div className="relative h-64 sm:h-80 lg:h-96">
+              <div className="relative aspect-[2/1] md:aspect-[21/9] w-full mb-12 md:mb-16 rounded-2xl overflow-hidden shadow-sm border border-border/50">
                 <Image
                   src={post.image}
                   alt={post.title}
@@ -134,55 +145,47 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             )}
 
-            {/* Post Content */}
-            <div className="p-6 sm:p-8">
-              <div
-                className="prose prose-lg dark:prose-invert max-w-none prose-headings:text-gray-900 dark:prose-headings:text-white prose-p:text-gray-700 dark:prose-p:text-gray-300 prose-a:text-blue-600 dark:prose-a:text-blue-400"
-                dangerouslySetInnerHTML={{ __html: contentHtml }}
-              />
-            </div>
+            {/* Article Content - Centered Prose */}
+            <div
+              className="prose prose-lg dark:prose-invert max-w-none prose-headings:scroll-mt-20 prose-headings:font-bold prose-headings:tracking-tight prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-img:rounded-xl prose-img:shadow-sm"
+              dangerouslySetInnerHTML={{ __html: contentHtml }}
+            />
           </article>
         </main>
 
-        {/* Related Posts */}
+        {/* Divider */}
+        <hr className="my-16 md:my-24 border-border" />
+
+        {/* Related Posts Section */}
         {suggestedPosts.length > 0 && (
-          <section className="mt-16">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="w-1 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded"></div>
-              <div>
-                <h2 className="text-3xl font-bold text-gray-900 dark:text-white">
-                  {relatedPosts.length > 0 ? 'Related Articles' : 'Recent Articles'}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-300">Continue exploring</p>
-              </div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {suggestedPosts.map((relatedPost) => (
-                <BlogCard
-                  key={relatedPost.slug}
-                  slug={relatedPost.slug}
-                  title={relatedPost.title}
-                  excerpt={relatedPost.excerpt}
-                  date={relatedPost.date}
-                  readTime={relatedPost.readTime}
-                  category={relatedPost.tags?.[0] || "General"}
-                  categoryColor={categoryColors[relatedPost.tags?.[0]] || "bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300"}
-                  image={relatedPost.image}
-                  icon={<BookOpen className="w-5 h-5" />}
-                />
-              ))}
+          <section>
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl font-bold tracking-tight">
+                Continue Reading
+              </h2>
+              <Link
+                href="/blog"
+                className="text-sm font-medium text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                View all articles
+              </Link>
             </div>
 
-            {/* View all posts */}
-            <div className="text-center mt-12">
-              <Link 
-                href="/blog"
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium"
-              >
-                View All Posts
-                <ArrowRight className="w-5 h-5 ml-2" />
-              </Link>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {suggestedPosts.map((relatedPost) => (
+                <div key={relatedPost.slug} className="h-full">
+                  <BlogCard
+                    slug={relatedPost.slug}
+                    title={relatedPost.title}
+                    excerpt={relatedPost.excerpt}
+                    date={relatedPost.date}
+                    readTime={relatedPost.readTime}
+                    category={relatedPost.tags?.[0] || "General"}
+                    image={relatedPost.image}
+                    icon={<Clock className="w-4 h-4" />} // Simple fallback icon
+                  />
+                </div>
+              ))}
             </div>
           </section>
         )}

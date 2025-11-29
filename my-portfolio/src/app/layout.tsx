@@ -8,6 +8,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { ThemeProvider } from "next-themes";
 import "katex/dist/katex.min.css";
+import "highlight.js/styles/github.css";
 
 // Configure both fonts
 const inter = Inter({ subsets: ["latin"] });

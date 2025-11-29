@@ -1,8 +1,8 @@
 ---
 title: "Understanding the Math Behind PBFT's Consensus Threshold"
 date: "2024-01-15"
-excerpt: "An overview of contemporary network security threats and the evolving landscape of cybersecurity in distributed systems."
-tags: ["Network Security", "Cybersecurity", "Distributed Systems"]
+excerpt: "A simple explanation of the math behind PBFT's consensus threshold"
+tags: ["Security", "Distributed Systems"]
 image: "/images/blog/consensus.png" # Add this line
 ---
 
@@ -16,9 +16,9 @@ PBFT (Practical Byzantine Fault Tolerance) is a widely used consensus algorithm 
 
 To be considered reliable, any consensus algorithm must solve two essential problems:
 
-**Safety:** The system must never finalize two conflicting decisions. For example, it should not be possible for both Block A and Block B to be committed at the same height. Once a decision is made, it is final.
+1. The system must never finalize two conflicting decisions. For example, it should not be possible for both Block A and Block B to be committed at the same height. Once a decision is made, it is final.
 
-**Liveness:** The system must continue making progress. Even if some nodes are faulty or unresponsive, the honest nodes should still be able to reach consensus and not get stuck.
+2. The system must continue making progress. Even if some nodes are faulty or unresponsive, the honest nodes should still be able to reach consensus and not get stuck.
 
 The rules $n \geq 3f + 1$ (total nodes) and $q = 2f + 1$ (quorum size) are the minimum requirements needed to satisfy both properties.
 

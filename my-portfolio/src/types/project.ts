@@ -1,13 +1,11 @@
 export interface Project {
   id: string;
   title: string;
-  shortDescription: string;
-  longDescription: string[];
-  image: string;
+  highlights: string[];
   techStack: string[];
+  reportUrl?: string; // Changed to optional
   githubUrl?: string;
-  features: string[];
-  slug: string;
+  image?: string;
   date: string;
   category: string;
 }
