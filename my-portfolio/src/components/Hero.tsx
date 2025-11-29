@@ -101,9 +101,6 @@ export default function Hero() {
             <p className="text-lg text-foreground/80 mb-1">
               {userDetails.jobTitle}
             </p>
-            <p className="text-md text-foreground/60 mb-4">
-              {userDetails.institution}
-            </p>
             <div className="flex flex-wrap justify-center items-center gap-3 mb-3">
               {userDetails.socials.map((social) => (
                 <a

@@ -82,7 +82,7 @@ export async function markdownToHtml(markdown: string): Promise<string> {
     })
     // Add rehypeHighlight BEFORE rehypeStringify
     // ignoreMissing: true prevents errors if a language isn't found
-    .use(rehypeHighlight, { ignoreMissing: true })
+    .use(rehypeHighlight, { ignoreMissing: true } as any)
     .use(rehypeKatex, {
       strict: false,
       trust: true,
