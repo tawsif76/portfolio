@@ -3,9 +3,9 @@ import { projects } from "@/data/projects";
 import ProjectsGrid from "@/components/projects/ProjectsGrid";
 
 export const metadata: Metadata = {
-  title: "Projects | Academic Portfolio",
+  title: "Projects | Network Simulations & Machine Learning", // More descriptive than just "Projects"
   description:
-    "Explore my academic and research projects in computer science and networking.",
+    "Explore academic projects in TCP/IP, NDN, ns-3 simulations, ndnSIM, SUMO, openstreetmap and Full Stack development by Mohammed Sydul Hasan Tawsif.",
 };
 
 export default function ProjectsPage() {

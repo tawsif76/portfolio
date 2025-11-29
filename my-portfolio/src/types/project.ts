@@ -1,9 +1,10 @@
 export interface Project {
   id: string;
   title: string;
+  slug: string; // Added this field
   highlights: string[];
   techStack: string[];
-  reportUrl?: string; // Changed to optional
+  reportUrl?: string;
   githubUrl?: string;
   image?: string;
   date: string;

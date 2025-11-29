@@ -18,9 +18,39 @@ const sourceSerif4 = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "Your Name - Computer Science Researcher",
+  metadataBase: new URL("https://htawsif.vercel.app/"), // REPLACE with your actual Vercel domain
+  title: {
+    default: "Mohammed Sydul Hasan Tawsif | Computer Science",
+    template: "%s | Tawsif's Portfolio", // This adds a suffix to other pages automatically
+  },
   description:
-    "PhD applicant specializing in Computer Networking, Attack Detection, and Quality of Service",
+    "Portfolio of Mohammed Sydul Hasan Tawsif, a Computer Science graduate specializing in Network Security, NDN, and Distributed Systems.",
+  keywords: [
+    "Computer Science",
+    "Networking",
+    "NDN",
+    "Research",
+    "Simulations",
+    "ns-3",
+    "SUMO",
+    "ndnSIM",
+    "Named Data Networking",
+    "Blockchain",
+  ],
+  authors: [{ name: "Mohammed Sydul Hasan Tawsif" }],
+  creator: "Mohammed Sydul Hasan Tawsif",
+  openGraph: {
+    title: "Mohammed Sydul Hasan Tawsif | Academic Portfolio",
+    description: "Researcher in Computer Networking and Security.",
+    url: "https://htawsif.vercel.app/",
+    siteName: "Tawsif Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
