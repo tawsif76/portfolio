@@ -88,14 +88,16 @@ export default function ProjectCard({ project }: ProjectCardProps) {
           ) : (
             <div></div> // Spacer to keep GitHub aligned right
           )}
-
           {project.githubUrl && (
             <a
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="p-2 text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
-              onClick={(e) => e.stopPropagation()} // Prevent bubbling
+              // UPDATED FOR MAX CONTRAST:
+              // 1. Base color: text-gray-900 (almost black) / dark:text-gray-100 (almost white)
+              // 2. Hover color: hover:text-blue-600 / dark:hover:text-blue-400 (adds color on interaction)
+              className="p-2 text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full"
+              onClick={(e) => e.stopPropagation()}
               title="View Code on GitHub"
             >
               <Github className="w-5 h-5" />

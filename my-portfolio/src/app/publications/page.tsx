@@ -7,8 +7,22 @@ export const metadata = {
     "A collection of my research papers, ongoing projects, and publications in network security and distributed systems.",
 };
 
+// Define the shape of a link object
+interface PublicationLink {
+  label: string;
+  href: string;
+  icon: any; // using 'any' for the Lucide icon component for simplicity
+}
+
 export default function PublicationsPage() {
-  const publications = [
+  // Explicitly type the array so 'links' is not inferred as never[]
+  const publications: {
+    id: number;
+    title: string;
+    status: string;
+    statusColor: string;
+    links: PublicationLink[];
+  }[] = [
     {
       id: 1,
       title:
@@ -29,16 +43,16 @@ export default function PublicationsPage() {
       statusColor:
         "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300 border-yellow-200 dark:border-yellow-800",
       links: [
-        {
-          label: "Paper",
-          href: "https://drive.google.com/file/d/1i-eYkA-66l3JA1K01CramEbbHJDAFFaD/view?usp=sharing",
-          icon: FileText,
-        },
-        {
-          label: "Code",
-          href: "https://github.com/tawsif76/VNDN-BC",
-          icon: Code,
-        },
+        // {
+        //   label: "Paper",
+        //   href: "https://drive.google.com/file/d/1i-eYkA-66l3JA1K01CramEbbHJDAFFaD/view?usp=sharing",
+        //   icon: FileText,
+        // },
+        // {
+        //   label: "Code",
+        //   href: "https://github.com/tawsif76/VNDN-BC",
+        //   icon: Code,
+        // },
       ],
     },
     {
@@ -49,16 +63,16 @@ export default function PublicationsPage() {
       statusColor:
         "bg-gray-100 text-gray-800 dark:bg-gray-800 dark:text-gray-300 border-gray-200 dark:border-gray-700",
       links: [
-        {
-          label: "Paper",
-          href: "https://drive.google.com/file/d/1PVTmgvVrLihLH92mpbyOlRuPJ9NrlnCB/view?usp=sharing",
-          icon: FileText,
-        },
-        {
-          label: "Code",
-          href: "https://github.com/tawsif76/RF-Block-App",
-          icon: Code,
-        },
+        // {
+        //   label: "Paper",
+        //   href: "https://drive.google.com/file/d/1PVTmgvVrLihLH92mpbyOlRuPJ9NrlnCB/view?usp=sharing",
+        //   icon: FileText,
+        // },
+        // {
+        //   label: "Code",
+        //   href: "https://github.com/tawsif76/RF-Block-App",
+        //   icon: Code,
+        // },
       ],
     },
   ];

@@ -7,7 +7,8 @@ export const projects: Project[] = [
     slug: "barbell-exercise-recognition", // Added slug
     date: "2024-01-20",
     category: "Machine Learning",
-    reportUrl: "#",
+    reportUrl:
+      "https://drive.google.com/file/d/1XuAxhsdIk5GcKWK6Hs7P-dqNSpTX8o58/view?usp=sharing",
     githubUrl:
       "https://github.com/tawsif76/Tracking-Barbell-Exercise-/tree/main/trackingBarbellExercise",
     image: "/images/swd.png",
@@ -42,7 +43,7 @@ export const projects: Project[] = [
     slug: "autox-workshop-system", // Added slug
     date: "2023-11-15",
     category: "Full Stack",
-    reportUrl: "#",
+    // reportUrl: "#",
     githubUrl: "https://github.com/tawsif76/AutoX-React2",
     image: "/images/autox.png",
     highlights: [
@@ -66,7 +67,7 @@ export const projects: Project[] = [
     slug: "legal-aid-management", // Added slug
     date: "2023-08-10",
     category: "Full Stack",
-    reportUrl: "#",
+    // reportUrl: "#",
     githubUrl: "https://github.com/tawsif76/legal-aid",
     image: "/images/legal.png",
     highlights: [
